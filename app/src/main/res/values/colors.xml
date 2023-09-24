@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="toolbar_color">#0d134b</color>
+    <color name="add_job_btn_color">#25d4fa</color>
+    <color name="custom_up_button_color">#0886ca</color>
+    <color name="location_font_color">#675151</color>
+    <color name="jobrecycler_color">#fdfcfc</color>
+    <color name="jobbackground_color">#e6e6e6</color>
+
+
+
+</resources>
