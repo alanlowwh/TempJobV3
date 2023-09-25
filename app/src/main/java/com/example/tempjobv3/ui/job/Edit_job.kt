@@ -4,19 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 
 import com.example.tempjobv3.R
+import com.example.tempjobv3.data.jobs.AddJobViewModel
 import com.example.tempjobv3.data.jobs.Jobs
 
 
 class edit_job : Fragment() {
 
     private lateinit var receivedJob: Jobs
+    private lateinit var addJobViewModel: AddJobViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        addJobViewModel = ViewModelProvider(this).get(AddJobViewModel::class.java)
+
 
         // Use Safe Args to retrieve the passed argument
         arguments?.let {
@@ -25,6 +32,7 @@ class edit_job : Fragment() {
         }
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,11 +59,45 @@ class edit_job : Fragment() {
 //            jobDescriptionEditText.setText(receivedJob.jobDescription)
             salaryEditText.setText(receivedJob.salary.toString())
 
+
+
+
+            val updateButton = view.findViewById<Button>(R.id.update_job_btn)
+
+            // Set a click listener for the update button
+            updateButton.setOnClickListener {
+                updateJobDetails()
+            }
+
         }
 
         return view
     }
 
+    private fun updateJobDetails() {
+        // Retrieve the edited values from the EditText fields
+        val jobTitleEditText = jobTitleEditText.text.toString()
+        val updatedCompanyName = companyNameEditText.text.toString()
+        val updatedSalary = salaryEditText.text.toString().toDouble()
+
+        // Create a new Jobs object with the updated values
+        val updatedJob = Jobs(
+            receivedJob.id, // Keep the same ID
+            updatedJobTitle,
+            updatedCompanyName,
+            receivedJob.workplaceType,
+            receivedJob.jobLocation,
+            receivedJob.jobType,
+            receivedJob.jobDescription,
+            updatedSalary
+        )
+
+        // Update the job details in the ViewModel
+        addJobViewModel.updateJobs(updatedJob)
+
+        // Navigate back to the job list or perform any other necessary action
+        findNavController().navigateUp()
+    }
 
 
 }

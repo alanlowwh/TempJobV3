@@ -1,10 +1,11 @@
 plugins {
+
     id("com.android.application")
     id("kotlin-android")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
-    id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
 
 }
 

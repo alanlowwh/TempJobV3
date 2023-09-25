@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 
 
 import androidx.compose.ui.layout.Layout
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tempjobv3.R
@@ -51,7 +52,7 @@ class ListJobAdapter(private val listener: OnItemClickListener) :
             currentItem.salary.toString()
 
 
-        //pass data safeargs
+        //pass data safeargs when click the row in recycler(Modify to detail fragment)
         holder.itemView.setOnClickListener {
             listener.onItemClick(currentItem)
         }
@@ -65,7 +66,8 @@ class ListJobAdapter(private val listener: OnItemClickListener) :
                 when (menuItem.itemId) {
                     R.id.menu_edit -> {
                         // Handle the edit action
-                        val action = ListJobFragmentDirections.actionListJobToEditJob(currentItem)
+
+                        val action = list_jobDirections.actionListJobToEditJob(currentItem)
                         holder.itemView.findNavController().navigate(action)
 
 
