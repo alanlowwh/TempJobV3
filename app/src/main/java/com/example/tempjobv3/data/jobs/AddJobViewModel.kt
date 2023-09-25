@@ -27,4 +27,11 @@ class AddJobViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    fun updateJobs(jobs: Jobs){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.updateJobs(jobs)
+        }
+    }
+
+
 }

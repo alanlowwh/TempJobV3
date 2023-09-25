@@ -17,6 +17,9 @@ interface JobsDao {
     @Insert
      fun addJobs(jobs: Jobs)
 
+     @Update
+     fun updateJobs(jobs: Jobs)
+
     @Query("SELECT * FROM JobListing")
      fun readAllData(): LiveData<List<Jobs>>
 

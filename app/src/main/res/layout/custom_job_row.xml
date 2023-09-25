@@ -8,7 +8,8 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:paddingBottom="20dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/rowLayout">
 
     <TextView
         android:id="@+id/jobTitle_textView"
@@ -44,7 +45,7 @@
 
     <ImageButton
 
-        android:id="@+id/imageButton"
+        android:id="@+id/popUpMenuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

@@ -18,6 +18,10 @@ class JobsRepository(private val jobsDao: JobsDao) {
         }
     }
 
+    fun updateJobs(jobs: Jobs){
+        jobsDao.updateJobs(jobs)
+    }
+
 //    @WorkerThread
 //    suspend fun insert(job: Jobs): Boolean {
 //

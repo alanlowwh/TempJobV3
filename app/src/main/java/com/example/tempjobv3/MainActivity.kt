@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController)
 
 
-// Enable the "Up" button
+        // Enable the "Up" button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 

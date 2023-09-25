@@ -7,7 +7,7 @@
     tools:context=".ui.job.edit_job">
 
     <EditText
-        android:id="@+id/jobTitle_editText"
+        android:id="@+id/update_jobTitle_editText"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="50dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/companyName_editText"
+        android:id="@+id/update_companyName_editText"
         android:layout_width="300dp"
         android:layout_height="40dp"
 
@@ -35,10 +35,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jobTitle_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/update_jobTitle_editText" />
 
     <EditText
-        android:id="@+id/workplaceType_editText"
+        android:id="@+id/update_workplaceType_editText"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="21dp"
@@ -50,10 +50,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/companyName_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/update_companyName_editText" />
 
     <EditText
-        android:id="@+id/jobLocation_editText"
+        android:id="@+id/update_jobLocation_editText"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="30dp"
@@ -64,10 +64,10 @@
         android:paddingLeft="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/workplaceType_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/update_workplaceType_editText" />
 
     <EditText
-        android:id="@+id/jobType_editText"
+        android:id="@+id/update_jobType_editText"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="22dp"
@@ -79,10 +79,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jobLocation_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/update_jobLocation_editText" />
 
     <EditText
-        android:id="@+id/jobDescription_editText"
+        android:id="@+id/update_jobDescription_editText"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -98,10 +98,10 @@
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jobType_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/update_jobType_editText" />
 
     <EditText
-        android:id="@+id/salary_editText"
+        android:id="@+id/update_salary_editText"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginStart="24dp"
@@ -115,18 +115,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jobDescription_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/update_jobDescription_editText" />
 
     <Button
-        android:id="@+id/post_job_btn"
+        android:id="@+id/update_job_btn"
         android:layout_width="275dp"
         android:layout_height="58dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/add_job_btn_color"
-        android:text="Post Job"
+        android:text="Update"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/salary_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/update_salary_editText" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"

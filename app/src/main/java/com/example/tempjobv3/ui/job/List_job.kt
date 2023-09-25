@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.example.tempjobv3.R
 import com.example.tempjobv3.data.jobs.AddJobViewModel
+import com.example.tempjobv3.data.jobs.Jobs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 /**
@@ -34,7 +35,13 @@ class list_job : Fragment() {
         val view = inflater.inflate(R.layout.fragment_list_job, container, false)
 
         //RecyclerView
-        val adapter = ListJobAdapter()
+        val adapter = ListJobAdapter(object : ListJobAdapter.OnItemClickListener {
+            override fun onItemClick(job: Jobs) {
+                // Handle item click here, e.g., navigate to the edit_job fragment with the selected job
+                val action = list_jobDirections.actionListJobToEditJob(job)
+                findNavController().navigate(action)
+            }
+        })
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerviewJob)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -44,6 +51,8 @@ class list_job : Fragment() {
         addJobViewModel.readAllJob.observe(viewLifecycleOwner, Observer{ jobs ->
             adapter.setData(jobs)
         })
+
+
 
 
         view.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener() {

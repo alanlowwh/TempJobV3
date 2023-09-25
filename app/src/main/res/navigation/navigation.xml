@@ -22,10 +22,20 @@
         <action
             android:id="@+id/action_list_job_to_add_job"
             app:destination="@id/add_job" />
+        <action
+            android:id="@+id/action_list_job_to_edit_job"
+            app:destination="@id/edit_job" />
     </fragment>
     <fragment
         android:id="@+id/edit_job"
         android:name="com.example.tempjobv3.ui.job.edit_job"
-        android:label="fragment_edit_job"
-        tools:layout="@layout/fragment_edit_job" />
+        android:label="Update Job"
+        tools:layout="@layout/fragment_edit_job" >
+        <action
+            android:id="@+id/action_edit_job_to_list_job"
+            app:destination="@id/list_job" />
+        <argument
+            android:name="selectedJob"
+            app:argType="com.example.tempjobv3.data.jobs.Jobs" />
+    </fragment>
 </navigation>

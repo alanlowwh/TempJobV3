@@ -1,10 +1,13 @@
 package com.example.tempjobv3.data.jobs
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
+import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "JobListing")
+@Parcelize
+
 data class Jobs(
     @PrimaryKey(autoGenerate = true)
     val jobListingId: Int = 0,
@@ -13,4 +16,4 @@ data class Jobs(
     var companyName: String,
     var salary: Int
 
-    )
+    ): Parcelable
