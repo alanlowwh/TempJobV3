@@ -23,4 +23,9 @@
             android:id="@+id/action_list_job_to_add_job"
             app:destination="@id/add_job" />
     </fragment>
+    <fragment
+        android:id="@+id/edit_job"
+        android:name="com.example.tempjobv3.ui.job.edit_job"
+        android:label="fragment_edit_job"
+        tools:layout="@layout/fragment_edit_job" />
 </navigation>

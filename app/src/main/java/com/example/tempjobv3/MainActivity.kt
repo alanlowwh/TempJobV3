@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
 
 
 // Enable the "Up" button
-        val actionBar = supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         // Set up navigation with the NavController
         setupActionBarWithNavController(navController)

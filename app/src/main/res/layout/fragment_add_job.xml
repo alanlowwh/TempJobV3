@@ -4,9 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
->
+    >
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.tempjobv3.data.jobs.AddJobViewModel" />
@@ -15,18 +16,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:background="@color/white"
         tools:context=".ui.job.add_job">
 
         <EditText
             android:id="@+id/jobTitle_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:layout_marginTop="50dp"
+            android:background="@drawable/rounded_textview"
             android:ems="10"
             android:hint="Job Title"
             android:inputType="text"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,12 +35,15 @@
 
         <EditText
             android:id="@+id/companyName_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+
             android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_textview"
             android:ems="10"
             android:hint="Company name"
             android:inputType="text"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,12 +51,14 @@
 
         <EditText
             android:id="@+id/workplaceType_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:layout_marginTop="21dp"
+            android:background="@drawable/rounded_textview"
             android:ems="10"
             android:hint="Workplace type"
             android:inputType="text"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,24 +66,28 @@
 
         <EditText
             android:id="@+id/jobLocation_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_textview"
             android:ems="10"
             android:hint="Job location"
             android:inputType="text"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/workplaceType_editText" />
 
         <EditText
             android:id="@+id/jobType_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:layout_marginTop="22dp"
+            android:background="@drawable/rounded_textview"
             android:ems="10"
             android:hint="Job type"
             android:inputType="text"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,27 +95,35 @@
 
         <EditText
             android:id="@+id/jobDescription_editText"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:ems="10"
+            android:background="@drawable/rounded_textview"
             android:hint="Description"
-            android:inputType="text"
+
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:minLines="3"
+            android:paddingStart="15dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/jobType_editText" />
 
         <EditText
             android:id="@+id/salary_editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="19dp"
             android:layout_marginEnd="24dp"
+            android:background="@drawable/rounded_textview"
             android:ems="10"
             android:hint="Salary"
             android:inputType="number|numberSigned"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,6 +134,7 @@
             android:layout_width="275dp"
             android:layout_height="58dp"
             android:layout_marginTop="24dp"
+            android:backgroundTint="@color/add_job_btn_color"
             android:text="Post Job"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +151,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </layout>

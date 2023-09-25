@@ -26,7 +26,7 @@ class ListJobAdapter : RecyclerView.Adapter<ListJobAdapter.MyViewHolder>() {
         val currentItem = jobList[position]
         holder.itemView.findViewById<TextView>(R.id.jobTitle_textView).text = currentItem.jobTitle
         holder.itemView.findViewById<TextView>(R.id.companyName_textView).text = currentItem.companyName
-        holder.itemView.findViewById<TextView>(R.id.salary_textView).text = currentItem.jobListingId.toString()
+        holder.itemView.findViewById<TextView>(R.id.salary_textView).text = currentItem.salary.toString()
 
     }
 

@@ -1,0 +1,8 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:tint="@color/custom_up_button_color"
+    android:viewportWidth="24.0"
+    android:viewportHeight="24.0">
+    <!-- Path data for the vector drawable -->
+</vector>
