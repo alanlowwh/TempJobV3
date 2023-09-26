@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/list_job">
+    app:startDestination="@id/detail_job">
 
     <fragment
         android:id="@+id/add_job"
@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_list_job_to_edit_job"
             app:destination="@id/edit_job" />
+        <action
+            android:id="@+id/action_list_job_to_detail_job2"
+            app:destination="@id/detail_job" />
     </fragment>
     <fragment
         android:id="@+id/edit_job"
@@ -37,5 +40,18 @@
         <argument
             android:name="selectedJob"
             app:argType="com.example.tempjobv3.data.jobs.Jobs" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail_job"
+        android:name="com.example.tempjobv3.ui.job.detail_job"
+        android:label="Job Details"
+        tools:layout="@layout/fragment_detail_job" >
+        <action
+            android:id="@+id/action_detail_job_to_list_job"
+            app:destination="@id/list_job" />
+        <argument
+            android:name="selectedJobToDetail"
+            app:argType="com.example.tempjobv3.data.jobs.Jobs"
+            app:nullable="true" />
     </fragment>
 </navigation>
