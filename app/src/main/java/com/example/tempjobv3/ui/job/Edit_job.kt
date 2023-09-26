@@ -73,13 +73,13 @@ class edit_job : Fragment() {
 
             updateButton.setOnClickListener {
 
-                val EditedJobTitleEditText = view.findViewById<EditText>(R.id.update_jobTitle_editText)
-                val EditedCompanyNameEditText = view.findViewById<EditText>(R.id.update_companyName_editText)
+                val EditedJobTitleEditText = view.findViewById<EditText>(R.id.update_jobTitle_editText).text
+                val EditedCompanyNameEditText = view.findViewById<EditText>(R.id.update_companyName_editText).text
 //            val workplaceTypeEditText = view.findViewById<EditText>(R.id.update_workplaceType_editText)
 //            val jobLocationEditText = view.findViewById<EditText>(R.id.update_jobLocation_editText)
 //            val jobTypeEditText = view.findViewById<EditText>(R.id.update_jobType_editText)
 //            val jobDescriptionEditText = view.findViewById<EditText>(R.id.update_jobDescription_editText)
-                val EditedSalaryEditText = view.findViewById<EditText>(R.id.update_salary_editText)
+                val EditedSalaryEditText = view.findViewById<EditText>(R.id.update_salary_editText).text
 
                 if (inputCheck(
                         EditedJobTitleEditText.toString(),
@@ -89,13 +89,13 @@ class edit_job : Fragment() {
                     // Create a new Jobs object with the updated values
                     val updatedJob = Jobs(
                         receivedJob.jobListingId, // Keep the same ID
-                        EditedJobTitleEditText.text.toString(),
-                        EditedCompanyNameEditText.text.toString(),
+                        EditedJobTitleEditText.toString(),
+                        EditedCompanyNameEditText.toString(),
 //                    receivedJob.workplaceType,
 //                    receivedJob.jobLocation,
 //                    receivedJob.jobType,
 //                    receivedJob.jobDescription,
-                        EditedSalaryEditText.text.toString().toInt()
+                        EditedSalaryEditText.toString().toInt()
                     )
 
                     // Update the job details in the ViewModel
