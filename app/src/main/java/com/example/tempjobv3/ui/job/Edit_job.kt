@@ -1,17 +1,24 @@
 package com.example.tempjobv3.ui.job
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.withContext
 
 import com.example.tempjobv3.R
 import com.example.tempjobv3.data.jobs.AddJobViewModel
 import com.example.tempjobv3.data.jobs.Jobs
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class edit_job : Fragment() {
@@ -60,13 +67,64 @@ class edit_job : Fragment() {
             salaryEditText.setText(receivedJob.salary.toString())
 
 
-
+            // Set a click listener for the update button
 
             val updateButton = view.findViewById<Button>(R.id.update_job_btn)
 
-            // Set a click listener for the update button
             updateButton.setOnClickListener {
-                updateJobDetails()
+
+                val EditedJobTitleEditText = view.findViewById<EditText>(R.id.update_jobTitle_editText)
+                val EditedCompanyNameEditText = view.findViewById<EditText>(R.id.update_companyName_editText)
+//            val workplaceTypeEditText = view.findViewById<EditText>(R.id.update_workplaceType_editText)
+//            val jobLocationEditText = view.findViewById<EditText>(R.id.update_jobLocation_editText)
+//            val jobTypeEditText = view.findViewById<EditText>(R.id.update_jobType_editText)
+//            val jobDescriptionEditText = view.findViewById<EditText>(R.id.update_jobDescription_editText)
+                val EditedSalaryEditText = view.findViewById<EditText>(R.id.update_salary_editText)
+
+                if (inputCheck(
+                        EditedJobTitleEditText.toString(),
+                        EditedCompanyNameEditText.toString(),
+                        EditedSalaryEditText.toString())
+                ) {
+                    // Create a new Jobs object with the updated values
+                    val updatedJob = Jobs(
+                        receivedJob.jobListingId, // Keep the same ID
+                        EditedJobTitleEditText.text.toString(),
+                        EditedCompanyNameEditText.text.toString(),
+//                    receivedJob.workplaceType,
+//                    receivedJob.jobLocation,
+//                    receivedJob.jobType,
+//                    receivedJob.jobDescription,
+                        EditedSalaryEditText.text.toString().toInt()
+                    )
+
+                    // Update the job details in the ViewModel
+//                    addJobViewModel.updateJobs(updatedJob)
+
+                    // Navigate back to the job list or perform any other necessary action
+                    addJobViewModel.viewModelScope.launch(Dispatchers.IO) {
+                        //Add to Database
+                        addJobViewModel.updateJobs(updatedJob)
+                        withContext(Dispatchers.Main) {
+                            // Show success message and navigate to another fragment
+                            Toast.makeText(
+                                requireContext(),
+                                "Successfully updated!",
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                            //Navigate back to list fragment screen
+                            findNavController().navigate(R.id.action_edit_job_to_list_job)
+
+                        }
+                    }
+                }else{
+                    Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_LONG)
+                        .show()
+
+                }
+
+
             }
 
         }
@@ -74,29 +132,10 @@ class edit_job : Fragment() {
         return view
     }
 
-    private fun updateJobDetails() {
-        // Retrieve the edited values from the EditText fields
-        val jobTitleEditText = jobTitleEditText.text.toString()
-        val updatedCompanyName = companyNameEditText.text.toString()
-        val updatedSalary = salaryEditText.text.toString().toDouble()
-
-        // Create a new Jobs object with the updated values
-        val updatedJob = Jobs(
-            receivedJob.id, // Keep the same ID
-            updatedJobTitle,
-            updatedCompanyName,
-            receivedJob.workplaceType,
-            receivedJob.jobLocation,
-            receivedJob.jobType,
-            receivedJob.jobDescription,
-            updatedSalary
-        )
-
-        // Update the job details in the ViewModel
-        addJobViewModel.updateJobs(updatedJob)
-
-        // Navigate back to the job list or perform any other necessary action
-        findNavController().navigateUp()
+    private fun inputCheck(jobTitle: String, companyName: String, salary: String): Boolean {
+        return !(TextUtils.isEmpty(jobTitle) || TextUtils.isEmpty(companyName) || TextUtils.isEmpty(
+            salary
+        ))
     }
 
 
