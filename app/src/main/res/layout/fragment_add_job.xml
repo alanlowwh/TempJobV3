@@ -49,26 +49,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/jobTitle_editText" />
 
-        <EditText
-            android:id="@+id/workplaceType_editText"
+        <Spinner
+            android:id="@+id/spinner_workplacetype"
+            android:entries="@array/spinner_items"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_marginTop="21dp"
-            android:background="@drawable/rounded_textview"
-            android:ems="10"
-            android:hint="Workplace type"
-            android:inputType="text"
-            android:paddingLeft="15dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/jobLocationEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/companyName_editText" />
 
         <EditText
-            android:id="@+id/jobLocation_editText"
+            android:id="@+id/jobLocationEditText"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/rounded_textview"
             android:ems="10"
             android:hint="Job location"
@@ -76,10 +74,10 @@
             android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/workplaceType_editText" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner_workplacetype" />
 
         <EditText
-            android:id="@+id/jobType_editText"
+            android:id="@+id/jobTypeEditTexts"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_marginTop="22dp"
@@ -91,7 +89,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/jobLocation_editText" />
+            app:layout_constraintTop_toBottomOf="@+id/jobLocationEditText" />
 
         <EditText
             android:id="@+id/jobDescription_editText"
@@ -110,7 +108,7 @@
             android:paddingBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/jobType_editText" />
+            app:layout_constraintTop_toBottomOf="@+id/jobTypeEditTexts" />
 
         <EditText
             android:id="@+id/salary_editText"

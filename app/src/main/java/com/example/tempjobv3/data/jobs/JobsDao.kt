@@ -20,7 +20,7 @@ interface JobsDao {
      @Update
      fun updateJobs(jobs: Jobs)
 
-    @Query("SELECT * FROM JobListing")
+    @Query("SELECT * FROM JobListing WHERE jobListingStatus = 'Available'")
      fun readAllData(): LiveData<List<Jobs>>
 
 }

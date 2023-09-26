@@ -9,17 +9,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
+import com.example.tempjobv3.R
 import com.example.tempjobv3.data.jobs.AddJobViewModel
 import com.example.tempjobv3.data.jobs.Jobs
+import com.example.tempjobv3.data.jobs.JobsDatabase
 import com.example.tempjobv3.data.jobs.JobsRepository
 import com.example.tempjobv3.databinding.FragmentAddJobBinding
-import com.example.tempjobv3.data.jobs.JobsDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import androidx.lifecycle.viewModelScope
-import com.example.tempjobv3.R
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 
 class add_job : Fragment() {
 
@@ -53,10 +56,42 @@ class add_job : Fragment() {
         val jobTitle = binding.jobTitleEditText.text.toString()
         val companyName = binding.companyNameEditText.text.toString()
         val salaryText = binding.salaryEditText.text.toString()
+        val jobDescription = binding.jobDescriptionEditText.text.toString()
+        val jobType = binding.jobTypeEditTexts.text.toString()
+        val jobLocation = binding.jobLocationEditText.text.toString()
+        val workplaceType = binding.spinnerWorkplacetype.selectedItem.toString()
 
-        if (inputCheck(jobTitle, companyName, salaryText)) {
-            val salary = salaryText.toInt()
-            val job = Jobs(jobTitle = jobTitle, companyName = companyName, salary = salary)
+
+
+
+
+        if (inputCheck(
+                jobTitle,
+                companyName,
+                salaryText,
+                jobDescription,
+                workplaceType,
+                jobType,
+                jobLocation
+            )
+        ) {
+//            val JobListingStatus = "Available"
+//            val datePosted = getCurrentDate()
+
+            val currentDate = getCurrentDate()
+            val formattedDate = formatDate(currentDate)
+
+            val job = Jobs(
+                jobTitle = jobTitle,
+                companyName = companyName,
+                salary = salaryText.toInt(),
+                jobDescription = jobDescription,
+                workplaceType = workplaceType,
+                jobType = jobType,
+                datePosted = formattedDate,
+                jobListingStatus = "Available",
+                jobLocation = jobLocation
+            )
 
             mAddJobViewModel.viewModelScope.launch(Dispatchers.IO) {
                 //Add to Database
@@ -78,10 +113,35 @@ class add_job : Fragment() {
     }
 
 
-    private fun inputCheck(jobTitle: String, companyName: String, salary: String): Boolean {
+    private fun inputCheck(
+        jobTitle: String,
+        companyName: String,
+        salary: String,
+        jobDescription: String,
+        workplaceType: String,
+        jobType: String,
+        jobLocation: String
+    ): Boolean {
         return !(TextUtils.isEmpty(jobTitle) || TextUtils.isEmpty(companyName) || TextUtils.isEmpty(
             salary
-        ))
+        ) || TextUtils.isEmpty(jobDescription) || TextUtils.isEmpty(workplaceType) || TextUtils.isEmpty(
+            jobType
+        ) || TextUtils.isEmpty(jobLocation))
+    }
+
+//    fun getCurrentDate(): Date {
+//        val calendar = Calendar.getInstance()
+//        return calendar.time
+//    }
+
+    fun getCurrentDate(): Date {
+        val calendar = Calendar.getInstance()
+        return calendar.time
+    }
+
+    fun formatDate(date: Date?): String {
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        return sdf.format(date)
     }
 
 

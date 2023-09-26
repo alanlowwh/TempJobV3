@@ -14,17 +14,16 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/jobTitleTextView"
+            android:id="@+id/detail_jobTitleTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
-            android:text="Job Title"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/vvvv"
+            android:id="@+id/detail_datePosted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -35,11 +34,10 @@
 
 
     <TextView
-        android:id="@+id/companyNameTextView"
+        android:id="@+id/detail_companyNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Company Name"
         android:textSize="18sp"
         android:textStyle="italic" />
 
@@ -50,7 +48,7 @@
         android:background="@android:color/darker_gray" />
 
     <TextView
-        android:id="@+id/xxxx"
+        android:id="@+id/detail_workplaceType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -58,7 +56,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/yyyy"
+        android:id="@+id/detail_jobType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -66,7 +64,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/zzzz"
+        android:id="@+id/detail_jobLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -89,7 +87,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/jobDescriptionTextView"
+        android:id="@+id/detail_jobDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -106,11 +104,10 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/salaryTextView"
+        android:id="@+id/detail_salary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="3000"
         android:textSize="16sp" />
 
     <Button
@@ -119,7 +116,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_textview"
-
+        android:backgroundTint="@color/add_job_btn_color"
         android:text="View Job Application" />
 
 </LinearLayout>

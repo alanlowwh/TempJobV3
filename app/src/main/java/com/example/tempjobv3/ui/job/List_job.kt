@@ -37,9 +37,11 @@ class list_job : Fragment() {
         //RecyclerView
         val adapter = ListJobAdapter(object : ListJobAdapter.OnItemClickListener {
             override fun onItemClick(job: Jobs) {
-                // Handle item click here, e.g., navigate to the edit_job fragment with the selected job
-                val action = list_jobDirections.actionListJobToEditJob(job)
+                //When list in recyclerview is clicked, navigate to the other fragment passing object job
+                val action = list_jobDirections.actionListJobToDetailJob(job)
+//                val action = list_jobDirections.actionListJobToEditJob(job)
                 findNavController().navigate(action)
+
             }
         })
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerviewJob)

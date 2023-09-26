@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -41,29 +42,46 @@ class edit_job : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_edit_job, container, false)
 
         // Check if a Jobs object was received
         if (receivedJob != null) {
-            // Find the EditText fields in your layout
+            // Find the EditText fields layout
             val jobTitleEditText = view.findViewById<EditText>(R.id.update_jobTitle_editText)
             val companyNameEditText = view.findViewById<EditText>(R.id.update_companyName_editText)
-//            val workplaceTypeEditText = view.findViewById<EditText>(R.id.update_workplaceType_editText)
-//            val jobLocationEditText = view.findViewById<EditText>(R.id.update_jobLocation_editText)
-//            val jobTypeEditText = view.findViewById<EditText>(R.id.update_jobType_editText)
-//            val jobDescriptionEditText = view.findViewById<EditText>(R.id.update_jobDescription_editText)
             val salaryEditText = view.findViewById<EditText>(R.id.update_salary_editText)
+
+            val workplaceTypeSpinner =
+                view.findViewById<Spinner>(R.id.update_spinner_workplacetype)
+            val jobLocationEditText = view.findViewById<EditText>(R.id.update_jobLocation_editText)
+            val jobTypeEditText = view.findViewById<EditText>(R.id.update_jobType_editText)
+            val jobDescriptionEditText =
+                view.findViewById<EditText>(R.id.update_jobDescription_editText)
+
 
             jobTitleEditText.setText(receivedJob.jobTitle)
             companyNameEditText.setText(receivedJob.companyName)
-//            workplaceTypeEditText.setText(receivedJob.workplaceType)
-//            jobLocationEditText.setText(receivedJob.jobLocation)
-//            jobTypeEditText.setText(receivedJob.jobType)
-//            jobDescriptionEditText.setText(receivedJob.jobDescription)
+
+            when(receivedJob.workplaceType){
+                "On-site" -> {
+                    workplaceTypeSpinner.setSelection(0)
+                }
+                "Remote" -> {
+                    workplaceTypeSpinner.setSelection(1)
+                }
+                "Hybrid" -> {
+                    workplaceTypeSpinner.setSelection(2)
+
+                }
+            }
+
+
+            jobLocationEditText.setText(receivedJob.jobLocation)
+            jobTypeEditText.setText(receivedJob.jobType)
+            jobDescriptionEditText.setText(receivedJob.jobDescription)
             salaryEditText.setText(receivedJob.salary.toString())
 
 
@@ -73,54 +91,66 @@ class edit_job : Fragment() {
 
             updateButton.setOnClickListener {
 
-                val EditedJobTitleEditText = view.findViewById<EditText>(R.id.update_jobTitle_editText).text
-                val EditedCompanyNameEditText = view.findViewById<EditText>(R.id.update_companyName_editText).text
-//            val workplaceTypeEditText = view.findViewById<EditText>(R.id.update_workplaceType_editText)
-//            val jobLocationEditText = view.findViewById<EditText>(R.id.update_jobLocation_editText)
-//            val jobTypeEditText = view.findViewById<EditText>(R.id.update_jobType_editText)
-//            val jobDescriptionEditText = view.findViewById<EditText>(R.id.update_jobDescription_editText)
-                val EditedSalaryEditText = view.findViewById<EditText>(R.id.update_salary_editText).text
+                val EditedJobTitleEditText =
+                    view.findViewById<EditText>(R.id.update_jobTitle_editText).text
+                val EditedCompanyNameEditText =
+                    view.findViewById<EditText>(R.id.update_companyName_editText).text
+                val workplaceTypeSpinner =
+                    view.findViewById<Spinner>(R.id.update_spinner_workplacetype).selectedItem.toString()
+                val jobLocationEditText =
+                    view.findViewById<EditText>(R.id.update_jobLocation_editText).text
+                val jobTypeEditText = view.findViewById<EditText>(R.id.update_jobType_editText).text
+                val jobDescriptionEditText =
+                    view.findViewById<EditText>(R.id.update_jobDescription_editText).text
+                val EditedSalaryEditText =
+                    view.findViewById<EditText>(R.id.update_salary_editText).text
+
 
                 if (inputCheck(
                         EditedJobTitleEditText.toString(),
                         EditedCompanyNameEditText.toString(),
-                        EditedSalaryEditText.toString())
+                        EditedSalaryEditText.toString(),
+                        jobDescriptionEditText.toString(),
+                        workplaceTypeSpinner.toString(),
+                        jobTypeEditText.toString(),
+                        jobLocationEditText.toString()
+                    )
                 ) {
+
                     // Create a new Jobs object with the updated values
                     val updatedJob = Jobs(
                         receivedJob.jobListingId, // Keep the same ID
+
                         EditedJobTitleEditText.toString(),
                         EditedCompanyNameEditText.toString(),
-//                    receivedJob.workplaceType,
-//                    receivedJob.jobLocation,
-//                    receivedJob.jobType,
-//                    receivedJob.jobDescription,
-                        EditedSalaryEditText.toString().toInt()
+                        EditedSalaryEditText.toString().toInt(),
+                        jobDescriptionEditText.toString(),
+                        workplaceTypeSpinner.toString(),
+                        jobTypeEditText.toString(),
+                        receivedJob.datePosted,
+                        receivedJob.jobListingStatus,
+                        jobLocationEditText.toString()
                     )
 
-                    // Update the job details in the ViewModel
-//                    addJobViewModel.updateJobs(updatedJob)
+
 
                     // Navigate back to the job list or perform any other necessary action
                     addJobViewModel.viewModelScope.launch(Dispatchers.IO) {
                         //Add to Database
                         addJobViewModel.updateJobs(updatedJob)
                         withContext(Dispatchers.Main) {
-                            // Show success message and navigate to another fragment
                             Toast.makeText(
-                                requireContext(),
-                                "Successfully updated!",
-                                Toast.LENGTH_LONG
-                            )
-                                .show()
+                                requireContext(), "Successfully updated!", Toast.LENGTH_LONG
+                            ).show()
                             //Navigate back to list fragment screen
                             findNavController().navigate(R.id.action_edit_job_to_list_job)
 
                         }
                     }
-                }else{
-                    Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_LONG)
-                        .show()
+                } else {
+                    Toast.makeText(
+                        requireContext(), "Please fill out all fields.", Toast.LENGTH_LONG
+                    ).show()
 
                 }
 
@@ -132,11 +162,26 @@ class edit_job : Fragment() {
         return view
     }
 
-    private fun inputCheck(jobTitle: String, companyName: String, salary: String): Boolean {
+
+
+
+    private fun inputCheck(
+        jobTitle: String,
+        companyName: String,
+        salary: String,
+        jobDescription: String,
+        workplaceType: String,
+        jobType: String,
+        jobLocation: String
+    ): Boolean {
         return !(TextUtils.isEmpty(jobTitle) || TextUtils.isEmpty(companyName) || TextUtils.isEmpty(
             salary
-        ))
+        ) || TextUtils.isEmpty(jobDescription) || TextUtils.isEmpty(workplaceType) || TextUtils.isEmpty(
+            jobType
+        ) || TextUtils.isEmpty(jobLocation))
     }
 
 
 }
+
+
