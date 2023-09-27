@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6E6E6"
+    android:fillViewport="true"
+    tools:context=".ui.user.SignUp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Circular ImageView -->
+        <ImageView
+            android:id="@+id/LogoImage"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo" />
+
+        <!-- Name EditText -->
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="Name"
+            android:background="@drawable/edittext_rounded_background"
+            android:textColorHint="#000000"
+            android:paddingStart="13dp" />
+
+        <!-- Phone EditText -->
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="Phone"
+            android:inputType="phone"
+            android:background="@drawable/edittext_rounded_background"
+            android:textColorHint="#000000"
+            android:paddingStart="13dp" />
+
+        <!-- Gender EditText -->
+        <Spinner
+            android:id="@+id/spinnerGender"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="Select Gender"
+            android:background="@drawable/edittext_rounded_background"
+            android:textColorHint="#000000"
+            android:paddingStart="13dp" />
+
+        <Spinner
+            android:id="@+id/spinnerJobTitle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/edittext_rounded_background"
+            android:textColorHint="#000000"
+            android:paddingStart="13dp" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edittext_rounded_background"
+            android:textColorHint="#000000"
+            android:paddingStart="13dp" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext_rounded_background"
+            android:textColorHint="#000000"
+            android:paddingStart="13dp" />
+
+        <!--        &lt;!&ndash; Circular ImageView &ndash;&gt;-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/profileImageView"-->
+        <!--            android:layout_width="160dp"-->
+        <!--            android:layout_height="160dp"-->
+        <!--            android:layout_gravity="center_horizontal"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:scaleType="centerCrop"-->
+        <!--            android:src="@drawable/profile" /> &lt;!&ndash; Set a default image &ndash;&gt;-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/buttonImageUpload"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:layout_marginStart="24dp"-->
+        <!--            android:layout_marginEnd="24dp"-->
+        <!--            android:text="Upload Image"-->
+        <!--            android:background="@drawable/edittext_rounded_background"-->
+        <!--            android:textColor="@color/black" />-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/buttonResumeUpload"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:layout_marginStart="24dp"-->
+        <!--            android:layout_marginEnd="24dp"-->
+        <!--            android:text="Upload Resume"-->
+        <!--            android:background="@drawable/edittext_rounded_background"-->
+        <!--            android:textColor="@color/black" />-->
+
+        <Button
+            android:id="@+id/signUpButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:background="@drawable/green_btn" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/haveAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Already have an account ?"/>
+
+            <TextView
+                android:id="@+id/loginNow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue_color"
+                android:text="Login Now"
+                android:layout_marginStart="5dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
