@@ -22,6 +22,11 @@ class JobsRepository(private val jobsDao: JobsDao) {
         jobsDao.updateJobs(jobs)
     }
 
+    fun deleteJobs(jobs: Jobs){
+        jobsDao.deleteJob(jobs)
+    }
+
+
 //    @WorkerThread
 //    suspend fun insert(job: Jobs): Boolean {
 //

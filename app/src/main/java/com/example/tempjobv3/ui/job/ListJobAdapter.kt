@@ -69,15 +69,15 @@ class ListJobAdapter(private val listener: OnItemClickListener) :
 
                         val action = list_jobDirections.actionListJobToEditJob(currentItem)
                         holder.itemView.findNavController().navigate(action)
-
-
-                        // You can perform edit operations here
                         true
                     }
 
                     R.id.menu_delete -> {
                         // Handle the delete action
-                        // You can perform delete operations here
+                        val action = list_jobDirections.actionListJobToDeleteJob(currentItem)
+                        holder.itemView.findNavController().navigate(action)
+
+
                         true
                     }
 

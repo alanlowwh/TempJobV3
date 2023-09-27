@@ -33,5 +33,11 @@ class AddJobViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    fun deleteJobs(jobs: Jobs){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.deleteJobs(jobs)
+        }
+    }
+
 
 }

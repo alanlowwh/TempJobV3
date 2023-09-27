@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tempjobv3.R
 import com.example.tempjobv3.data.jobs.AddJobViewModel
 import com.example.tempjobv3.data.jobs.Jobs
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationBarView
 
 /**
  * A simple [Fragment] subclass.
@@ -34,6 +36,9 @@ class list_job : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list_job, container, false)
 
+
+
+
         //RecyclerView
         val adapter = ListJobAdapter(object : ListJobAdapter.OnItemClickListener {
             override fun onItemClick(job: Jobs) {
@@ -48,7 +53,7 @@ class list_job : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        //JobViewModel
+        //Job`ViewModel`
         addJobViewModel = ViewModelProvider(this).get(AddJobViewModel::class.java)
         addJobViewModel.readAllJob.observe(viewLifecycleOwner, Observer{ jobs ->
             adapter.setData(jobs)

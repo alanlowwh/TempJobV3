@@ -23,4 +23,8 @@ interface JobsDao {
     @Query("SELECT * FROM JobListing WHERE jobListingStatus = 'Available'")
      fun readAllData(): LiveData<List<Jobs>>
 
+    @Delete
+    fun deleteJob(job: Jobs)
+
+
 }

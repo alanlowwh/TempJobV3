@@ -18,6 +18,7 @@ import kotlinx.coroutines.withContext
 import com.example.tempjobv3.R
 import com.example.tempjobv3.data.jobs.AddJobViewModel
 import com.example.tempjobv3.data.jobs.Jobs
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -46,6 +47,18 @@ class edit_job : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_edit_job, container, false)
+
+        //Bottom nav implementation
+        val bottomNavView = view.findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavView.setOnItemReselectedListener { item ->
+            when (item.itemId) {
+                R.id.job_btm_nav -> {
+                    val action = edit_jobDirections.actionEditJobToListJob()
+                    findNavController().navigate(action)
+                }
+                // Handle other navigation cases here
+            }
+        }
 
         // Check if a Jobs object was received
         if (receivedJob != null) {
