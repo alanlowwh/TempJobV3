@@ -1,12 +1,10 @@
 plugins {
-
     id("com.android.application")
     id("kotlin-android")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
-
 }
 
 android {
@@ -47,6 +45,8 @@ android {
 
 dependencies {
 
+    implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
+
     val lifecycle_version = "2.6.2"
     val room_version = "2.5.2"
 
@@ -57,11 +57,8 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
-
-    //Navigation Components
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:2.5.3")
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
     implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")

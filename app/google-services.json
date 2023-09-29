@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "309078477784",
+    "firebase_url": "https://tempjobv3-default-rtdb.firebaseio.com",
+    "project_id": "tempjobv3",
+    "storage_bucket": "tempjobv3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309078477784:android:6697957b4da5e5c91640ad",
+        "android_client_info": {
+          "package_name": "com.example.tempjobv3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtGP7PZfXWYqtwbEZsPyNXI_DWKKtnuc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
