@@ -38,7 +38,6 @@ class ChangePassword : Fragment() {
             // Call the function to update the password
             updatePassword()
         }
-
         return view
     }
 

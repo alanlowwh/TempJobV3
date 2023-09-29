@@ -5,14 +5,14 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Applicant")
 data class User(
-    var name: String = "", // Provide default values for properties
+    var name: String = "",
     var email: String = "",
     var phone: String = "",
     var gender: String = "",
     var password: String = "",
     var jobTitle: String = "",
-    var role: String = "customer"
+    var role: String = "customer",
+    var resumeUrl: String? = "" // Add the resume URL field
 ) {
-    // No-argument constructor required by Firebase
-    constructor() : this("", "", "", "", "", "", "")
+    constructor() : this("", "", "", "", "", "", "", "")
 }

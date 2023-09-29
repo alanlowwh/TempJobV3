@@ -100,7 +100,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!-- Change Email and Password -->
+        <!-- Change Password -->
         <androidx.cardview.widget.CardView
             android:id="@+id/changeCardView"
             android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                 android:layout_marginStart="55dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Change Email and Password"
+                android:text="Change Password"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
         </androidx.cardview.widget.CardView>
