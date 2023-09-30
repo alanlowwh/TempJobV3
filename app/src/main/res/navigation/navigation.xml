@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/list_job">
+    app:startDestination="@id/firstPage">
 
     <fragment
         android:id="@+id/add_job"
@@ -72,4 +72,75 @@
             android:name="selected_deleteJob"
             app:argType="com.example.tempjobv3.data.jobs.Jobs" />
     </fragment>
+    <fragment
+        android:id="@+id/firstPage"
+        android:name="com.example.tempjobv3.ui.user.FirstPage"
+        android:label="First Page"
+        tools:layout="@layout/fragment_first_page" >
+        <action
+            android:id="@+id/action_firstPage_to_signUp"
+            app:destination="@id/signUp" />
+        <action
+            android:id="@+id/action_firstPage_to_login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.tempjobv3.ui.user.Profile"
+        android:label="Profile" >
+        <action
+            android:id="@+id/action_profile_to_editProfile"
+            app:destination="@id/editProfile" />
+        <action
+            android:id="@+id/action_profile_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_profile_to_changePassword"
+            app:destination="@id/changePassword" />
+        <action
+            android:id="@+id/action_profile_to_appliedJobs"
+            app:destination="@id/appliedJobs" />
+    </fragment>
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.tempjobv3.ui.user.Login"
+        android:label="Log In"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_login_to_signUp"
+            app:destination="@id/signUp" />
+        <action
+            android:id="@+id/action_login_to_list_job"
+            app:destination="@id/list_job" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUp"
+        android:name="com.example.tempjobv3.ui.user.SignUp"
+        android:label="Sign Up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUp_to_login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfile"
+        android:name="com.example.tempjobv3.ui.user.EditProfile"
+        android:label="Edit Profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/changePassword"
+        android:name="com.example.tempjobv3.ui.user.ChangePassword"
+        android:label="Change Password"
+        tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/appliedJobs"
+        android:name="com.example.tempjobv3.ui.user.AppliedJobs"
+        android:label="Applied Jobs" />
+    <fragment
+        android:id="@+id/cusJobList"
+        android:name="com.example.tempjobv3.ui.user.CusJobList"
+        android:label="CusJobList" />
 </navigation>

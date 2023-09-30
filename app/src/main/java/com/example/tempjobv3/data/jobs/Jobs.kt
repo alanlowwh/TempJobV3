@@ -26,4 +26,5 @@ data class Jobs(
 //    var firebaseId: String? = null
 
 
+)
     ): Parcelable
