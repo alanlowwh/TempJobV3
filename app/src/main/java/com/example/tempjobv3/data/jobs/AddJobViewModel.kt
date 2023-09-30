@@ -39,5 +39,18 @@ class AddJobViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    fun getLastInsertedId(): Long {
+        val lastId =repository.getLastInsertedId()
+        return lastId
+
+
+    }
+
+//    fun getLastInsertedId(): LiveData<Long> {
+//        val lastInsertedId: LiveData<Long> = repository.getLastInsertedId()
+//
+//        return lastInsertedId
+//    }
+
 
 }

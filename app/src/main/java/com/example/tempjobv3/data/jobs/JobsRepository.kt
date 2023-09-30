@@ -26,6 +26,14 @@ class JobsRepository(private val jobsDao: JobsDao) {
         jobsDao.deleteJob(jobs)
     }
 
+    fun getLastInsertedId(): Long{
+        return jobsDao.getLastInsertedId()
+    }
+
+//    fun getLastInsertedId(): LiveData<Long>{
+//        return jobsDao.getLastInsertedId()
+//    }
+
 
 //    @WorkerThread
 //    suspend fun insert(job: Jobs): Boolean {

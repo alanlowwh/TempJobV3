@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -17,6 +18,9 @@ import com.example.tempjobv3.data.jobs.Jobs
 import com.example.tempjobv3.data.jobs.JobsDatabase
 import com.example.tempjobv3.data.jobs.JobsRepository
 import com.example.tempjobv3.databinding.FragmentAddJobBinding
+import com.google.firebase.FirebaseApp
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.core.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -29,6 +33,7 @@ class add_job : Fragment() {
     private lateinit var mAddJobViewModel: AddJobViewModel
     private lateinit var binding: FragmentAddJobBinding
     private lateinit var jobRepo: JobsRepository
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,14 +101,42 @@ class add_job : Fragment() {
             mAddJobViewModel.viewModelScope.launch(Dispatchers.IO) {
                 //Add to Database
                 mAddJobViewModel.addJobs(job)
+//                val localJobListingId = mAddJobViewModel.addJobs(job)
                 withContext(Dispatchers.Main) {
                     // Show success message and navigate to another fragment
                     Toast.makeText(requireContext(), "Successfully posted!", Toast.LENGTH_LONG)
                         .show()
                     //Navigate back to list fragment screen
+
+
+
+
                     findNavController().navigate(R.id.action_add_job_to_list_job)
 
                 }
+                //Firebase Realtime database(Second method)
+                val lastInsertedId = mAddJobViewModel.getLastInsertedId()
+
+                val FirebaseJob = Jobs(
+                    jobTitle = jobTitle,
+                    companyName = companyName,
+                    salary = salaryText.toInt(),
+                    jobDescription = jobDescription,
+                    workplaceType = workplaceType,
+                    jobType = jobType,
+                    datePosted = formattedDate,
+                    jobListingStatus = "Available",
+                    jobLocation = jobLocation,
+//                    firebaseId = lastInsertedId.toString(),
+                    jobListingId = lastInsertedId.toString().toInt()
+                )
+
+                val database = FirebaseDatabase.getInstance()
+                val reference = database.getReference("Job") // Replace with your reference
+                val newEntryReference = reference.push()
+
+                // Set the data at the new entry under "job_applications"
+                newEntryReference.setValue(FirebaseJob)
             }
         } else {
             Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_LONG)
