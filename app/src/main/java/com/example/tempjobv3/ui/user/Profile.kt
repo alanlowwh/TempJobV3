@@ -61,6 +61,13 @@ class Profile : Fragment() {
             findNavController().navigate(R.id.action_profile_to_changePassword)
         }
 
+        val appliedJobs = view.findViewById<TextView>(R.id.appliedJobs)
+        // Handle click on "emailPassword" TextView
+        appliedJobs.setOnClickListener {
+            // Navigate to the "emailPassword" destination using the defined action
+            findNavController().navigate(R.id.action_profile_to_appliedJobs)
+        }
+
         val logoutTextView = view.findViewById<TextView>(R.id.logout)
         logoutTextView.setOnClickListener {
             // Call the logout function when the "Logout" TextView is clicked

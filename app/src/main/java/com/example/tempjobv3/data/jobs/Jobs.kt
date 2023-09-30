@@ -13,4 +13,4 @@ data class Jobs(
     var companyName: String,
     var salary: Int
 
-    )
+)

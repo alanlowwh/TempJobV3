@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_profile_to_changePassword"
             app:destination="@id/changePassword" />
+        <action
+            android:id="@+id/action_profile_to_appliedJobs"
+            app:destination="@id/appliedJobs" />
     </fragment>
     <fragment
         android:id="@+id/login"
@@ -81,6 +84,14 @@
     <fragment
         android:id="@+id/changePassword"
         android:name="com.example.tempjobv3.ui.user.ChangePassword"
-        android:label="fragment_change_password"
+        android:label="Change Password"
         tools:layout="@layout/fragment_change_password" />
+    <fragment
+        android:id="@+id/appliedJobs"
+        android:name="com.example.tempjobv3.ui.user.AppliedJobs"
+        android:label="Applied Jobs" />
+    <fragment
+        android:id="@+id/cusJobList"
+        android:name="com.example.tempjobv3.ui.user.CusJobList"
+        android:label="CusJobList" />
 </navigation>

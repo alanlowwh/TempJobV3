@@ -48,6 +48,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
     implementation("com.google.firebase:firebase-database-ktx:20.2.2")
     implementation("com.google.firebase:firebase-storage-ktx:20.2.1")
+    implementation("androidx.recyclerview:recyclerview:1.3.1")
     val lifecycle_version = "2.6.2"
     val room_version = "2.5.2"
 
