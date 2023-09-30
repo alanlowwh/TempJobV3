@@ -13,7 +13,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.tempjobv3.R
 import com.example.tempjobv3.data.jobs.AddJobViewModel
 import com.example.tempjobv3.data.jobs.Jobs
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -49,21 +53,17 @@ class delete_job : Fragment() {
                 findNavController().navigate(R.id.action_delete_job_to_list_job)
 
             }
+//Not working
+//            val databaseReference = FirebaseDatabase.getInstance().getReference("Job").child(receivedJob.jobListingId.toString())
+//            databaseReference.removeValue()
 
-            //Firebase
-            val database = FirebaseDatabase.getInstance()
-            val reference = database.getReference("Job") // Replace "Job" with your actual reference path
-            val jobListingIdToDelete = receivedJob.jobListingId // Replace with the actual jobListingId you want to delete
 
-            val query = reference.orderByChild("jobListingId").equalTo(jobListingIdToDelete)
 
 
         }
 
 
     }
-
-
 
 
 }
