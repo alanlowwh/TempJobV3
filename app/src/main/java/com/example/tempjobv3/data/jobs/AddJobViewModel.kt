@@ -27,4 +27,30 @@ class AddJobViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    fun updateJobs(jobs: Jobs){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.updateJobs(jobs)
+        }
+    }
+
+    fun deleteJobs(jobs: Jobs){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.deleteJobs(jobs)
+        }
+    }
+
+    fun getLastInsertedId(): Long {
+        val lastId =repository.getLastInsertedId()
+        return lastId
+
+
+    }
+
+//    fun getLastInsertedId(): LiveData<Long> {
+//        val lastInsertedId: LiveData<Long> = repository.getLastInsertedId()
+//
+//        return lastInsertedId
+//    }
+
+
 }

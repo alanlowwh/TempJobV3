@@ -1,4 +1,5 @@
 package com.example.tempjobv3.data.jobs
+
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
@@ -15,9 +16,23 @@ interface JobsDao {
 //    suspend fun delete(jobPost: Jobs)
 
     @Insert
-     fun addJobs(jobs: Jobs)
+    fun addJobs(jobs: Jobs)
 
-    @Query("SELECT * FROM JobListing")
-     fun readAllData(): LiveData<List<Jobs>>
+    @Update
+    fun updateJobs(jobs: Jobs)
+
+    @Query("SELECT * FROM JobListing WHERE jobListingStatus = 'Available'")
+    fun readAllData(): LiveData<List<Jobs>>
+
+    @Delete
+    fun deleteJob(job: Jobs)
+
+
+    @Query("SELECT MAX(jobListingId) FROM JobListing")
+    fun getLastInsertedId(): Long
+
+//    @Query("SELECT last_insert_rowid() FROM JobListing")
+//    fun getLastInsertedId(): LiveData<Long>
+
 
 }

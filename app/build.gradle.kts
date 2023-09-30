@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
 }
@@ -49,6 +50,7 @@ dependencies {
     implementation("com.google.firebase:firebase-database-ktx:20.2.2")
     implementation("com.google.firebase:firebase-storage-ktx:20.2.1")
     implementation("androidx.recyclerview:recyclerview:1.3.1")
+
     val lifecycle_version = "2.6.2"
     val room_version = "2.5.2"
 

@@ -2,8 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.TempJobV3" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your light theme here. -->
+
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
+
 
     <style name="Theme.TempJobV3" parent="Base.Theme.TempJobV3" />
 </resources>

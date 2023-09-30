@@ -15,6 +15,10 @@
         <item>Job Title 4</item>
         <item>Job Title 5</item>
         <!-- Add more job titles here -->
+    <string-array name="spinner_items">
+        <item>On-site</item>
+        <item>Remote</item>
+        <item>Hybrid</item>
     </string-array>
 
 </resources>

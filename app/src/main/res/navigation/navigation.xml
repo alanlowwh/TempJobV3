@@ -22,6 +22,55 @@
         <action
             android:id="@+id/action_list_job_to_add_job"
             app:destination="@id/add_job" />
+        <action
+            android:id="@+id/action_list_job_to_edit_job"
+            app:destination="@id/edit_job" />
+        <action
+            android:id="@+id/action_list_job_to_detail_job2"
+            app:destination="@id/detail_job" />
+        <action
+            android:id="@+id/action_list_job_to_detail_job"
+            app:destination="@id/detail_job" />
+        <action
+            android:id="@+id/action_list_job_to_delete_job"
+            app:destination="@id/delete_job" />
+    </fragment>
+    <fragment
+        android:id="@+id/edit_job"
+        android:name="com.example.tempjobv3.ui.job.edit_job"
+        android:label="Update Job"
+        tools:layout="@layout/fragment_edit_job" >
+        <action
+            android:id="@+id/action_edit_job_to_list_job"
+            app:destination="@id/list_job" />
+        <argument
+            android:name="selectedJob"
+            app:argType="com.example.tempjobv3.data.jobs.Jobs" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail_job"
+        android:name="com.example.tempjobv3.ui.job.detail_job"
+        android:label="Job Details"
+        tools:layout="@layout/fragment_detail_job" >
+        <action
+            android:id="@+id/action_detail_job_to_list_job"
+            app:destination="@id/list_job" />
+        <argument
+            android:name="selectedJobToDetail"
+            app:argType="com.example.tempjobv3.data.jobs.Jobs"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/delete_job"
+        android:name="com.example.tempjobv3.ui.job.delete_job"
+        android:label="fragment_delete_job"
+        tools:layout="@layout/fragment_delete_job" >
+        <action
+            android:id="@+id/action_delete_job_to_list_job"
+            app:destination="@id/list_job" />
+        <argument
+            android:name="selected_deleteJob"
+            app:argType="com.example.tempjobv3.data.jobs.Jobs" />
     </fragment>
     <fragment
         android:id="@+id/firstPage"
