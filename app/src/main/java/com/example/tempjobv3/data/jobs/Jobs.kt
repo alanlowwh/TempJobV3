@@ -3,6 +3,7 @@ package com.example.tempjobv3.data.jobs
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.firebase.database.PropertyName
 import kotlinx.android.parcel.Parcelize
 import java.util.Date
 
@@ -11,8 +12,10 @@ import java.util.Date
 
 data class Jobs(
     @PrimaryKey(autoGenerate = true)
-    val jobListingId: Int = 0,
-
+    @get:PropertyName("jobListingId")
+    @set:PropertyName("jobListingId")
+    var jobListingId: Int = 0,
+    var jobReferences: String,
     var jobTitle: String,
     var companyName: String,
     var salary: Int,
@@ -26,5 +29,4 @@ data class Jobs(
 //    var firebaseId: String? = null
 
 
-)
-    ): Parcelable
+): Parcelable

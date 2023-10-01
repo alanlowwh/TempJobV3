@@ -7,34 +7,34 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
-
 import com.example.tempjobv3.R
 import com.example.tempjobv3.data.jobs.AddJobViewModel
 import com.example.tempjobv3.data.jobs.Jobs
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/**
- * A simple [Fragment] subclass.
- * Use the [delete_job.newInstance] factory method to
- * create an instance of this fragment.
- */
 class delete_job : Fragment() {
 
     private lateinit var receivedJob: Jobs
     private lateinit var addJobViewModel: AddJobViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        addJobViewModel = ViewModelProvider(this).get(AddJobViewModel::class.java)
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_delete_job, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        addJobViewModel = ViewModelProvider(this).get(AddJobViewModel::class.java)
 
         // Use Safe Args to retrieve the passed argument
         arguments?.let {
@@ -42,28 +42,34 @@ class delete_job : Fragment() {
             receivedJob = args.selectedDeleteJob
         }
 
-        addJobViewModel.viewModelScope.launch(Dispatchers.IO) {
-            //Add to Database
+        // Launch a coroutine to perform the deletion
+        viewLifecycleOwner.lifecycleScope.launch {
+            // Remove the job locally
             addJobViewModel.deleteJobs(receivedJob)
-            withContext(Dispatchers.Main) {
-                Toast.makeText(
-                    requireContext(), "Successfully deleted!", Toast.LENGTH_LONG
-                ).show()
-                //Navigate back to list fragment screen
-                findNavController().navigate(R.id.action_delete_job_to_list_job)
 
+            // Remove the job from Firebase
+            val databaseReference = FirebaseDatabase.getInstance().getReference("Job")
+                .child(receivedJob.jobReferences.toString())
+
+            databaseReference.removeValue().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Deletion from Firebase was successful
+                    Toast.makeText(
+                        requireContext(),
+                        "Successfully deleted!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    // Navigate back to the list fragment screen
+                    findNavController().navigate(R.id.action_delete_job_to_list_job)
+                } else {
+                    // Handle any errors during Firebase deletion
+                    Toast.makeText(
+                        requireContext(),
+                        "Failed to delete job from Firebase",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
-//Not working
-//            val databaseReference = FirebaseDatabase.getInstance().getReference("Job").child(receivedJob.jobListingId.toString())
-//            databaseReference.removeValue()
-
-
-
-
         }
-
-
     }
-
-
 }

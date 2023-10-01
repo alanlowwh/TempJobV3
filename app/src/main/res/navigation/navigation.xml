@@ -59,11 +59,14 @@
             android:name="selectedJobToDetail"
             app:argType="com.example.tempjobv3.data.jobs.Jobs"
             />
+        <action
+            android:id="@+id/action_detail_job_to_applicationJob"
+            app:destination="@id/applicationJob" />
     </fragment>
     <fragment
         android:id="@+id/delete_job"
         android:name="com.example.tempjobv3.ui.job.delete_job"
-        android:label="fragment_delete_job"
+        android:label="Delete Job"
         tools:layout="@layout/fragment_delete_job" >
         <action
             android:id="@+id/action_delete_job_to_list_job"
@@ -115,6 +118,9 @@
         <action
             android:id="@+id/action_login_to_list_job"
             app:destination="@id/list_job" />
+        <action
+            android:id="@+id/action_login_to_cusJobList"
+            app:destination="@id/cusJobList" />
     </fragment>
     <fragment
         android:id="@+id/signUp"
@@ -142,5 +148,14 @@
     <fragment
         android:id="@+id/cusJobList"
         android:name="com.example.tempjobv3.ui.user.CusJobList"
-        android:label="CusJobList" />
+        android:label="Job List" >
+        <action
+            android:id="@+id/action_cusJobList_to_detail_job"
+            app:destination="@id/detail_job" />
+    </fragment>
+    <fragment
+        android:id="@+id/applicationJob"
+        android:name="com.example.tempjobv3.ui.job.ApplicationJob"
+        android:label="Application Jobs"
+        tools:layout="@layout/fragment_application_job" />
 </navigation>

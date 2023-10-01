@@ -77,16 +77,17 @@
 <!--            android:textColor="@color/black"-->
 <!--            />-->
 
-<!--        <Button-->
-<!--            android:id="@+id/buttonResumeUpload"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_marginStart="24dp"-->
-<!--            android:layout_marginEnd="24dp"-->
-<!--            android:text="Upload Resume"-->
-<!--            android:background="@drawable/edittext_rounded_background"-->
-<!--            android:textColor="@color/black" />-->
+        <Button
+            android:id="@+id/editResumeButton"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="Upload New Resume"
+            android:textAllCaps="false"
+            android:background="@drawable/edittext_rounded_background"
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/updateButton"
@@ -101,13 +102,5 @@
             android:textAllCaps="false"
             android:background="@drawable/blue_btn" />
     </LinearLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>

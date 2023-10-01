@@ -19,11 +19,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationBarView
 
-/**
- * A simple [Fragment] subclass.
- * Use the [list_job.newInstance] factory method to
- * create an instance of this fragment.
- */
 class list_job : Fragment() {
 
 
@@ -49,7 +44,7 @@ class list_job : Fragment() {
 
             }
         })
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerviewJob)
+            val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerviewJob)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -58,9 +53,6 @@ class list_job : Fragment() {
         addJobViewModel.readAllJob.observe(viewLifecycleOwner, Observer{ jobs ->
             adapter.setData(jobs)
         })
-
-
-
 
         view.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener() {
             findNavController().navigate(R.id.action_list_job_to_add_job)

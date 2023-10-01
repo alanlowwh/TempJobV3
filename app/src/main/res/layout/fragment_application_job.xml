@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     android:background="#E6E6E6"
     android:fillViewport="true"
-    tools:context=".ui.user.AppliedJobs">
+    tools:context=".ui.job.ApplicationJob">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/applied_jobs_list"
+        android:id="@+id/application_job"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_applied_job" />
+        tools:listitem="@layout/application_job" />
 
 </RelativeLayout>

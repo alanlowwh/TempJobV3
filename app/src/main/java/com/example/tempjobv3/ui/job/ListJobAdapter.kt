@@ -34,6 +34,7 @@ class ListJobAdapter(private val listener: OnItemClickListener) :
         val companyNameTextView: TextView = itemView.findViewById(R.id.companyName_textView)
         val salaryTextView: TextView = itemView.findViewById(R.id.salary_textView)
         val popupMenuButton: View = itemView.findViewById(R.id.popUpMenuButton)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

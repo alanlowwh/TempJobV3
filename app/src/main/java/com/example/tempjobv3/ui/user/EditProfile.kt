@@ -1,6 +1,10 @@
 package com.example.tempjobv3.ui.user
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +18,7 @@ import com.example.tempjobv3.R
 import com.example.tempjobv3.data.user.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.storage.FirebaseStorage
 
 class EditProfile : Fragment() {
 
@@ -22,6 +27,8 @@ class EditProfile : Fragment() {
     private lateinit var genderSpinner: Spinner
     private lateinit var jobTitleSpinner: Spinner
     private lateinit var updateButton: Button
+    private lateinit var editResumeButton: Button
+    private var resumeUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,11 +42,21 @@ class EditProfile : Fragment() {
         genderSpinner = view.findViewById(R.id.spinnerGender)
         jobTitleSpinner = view.findViewById(R.id.spinnerJobTitle)
         updateButton = view.findViewById(R.id.updateButton)
+        editResumeButton = view.findViewById(R.id.editResumeButton)
 
         // Add an OnClickListener to the "Edit Profile" button
         updateButton.setOnClickListener {
             // Call the function to update the profile
             updateProfile()
+        }
+
+        // Add an OnClickListener to the "Edit Resume" button
+        editResumeButton.setOnClickListener {
+            // Open a file picker to select or edit the resume
+            val galleryIntent = Intent()
+            galleryIntent.action = Intent.ACTION_GET_CONTENT
+            galleryIntent.type = "application/pdf" // You can specify the MIME type of the resume
+            startActivityForResult(galleryIntent, 2)
         }
 
         return view
@@ -164,6 +181,54 @@ class EditProfile : Fragment() {
                     ).show()
                 }
             }
+
+        // Update the resume URI if it has changed
+        if (resumeUri != null) {
+            // Upload the resume to Firebase Storage
+            val storageRef = FirebaseStorage.getInstance().reference
+            val resumeStorageRef = storageRef.child("resumes").child("$userId.pdf")
+
+            resumeStorageRef.putFile(resumeUri!!)
+                .addOnSuccessListener { taskSnapshot ->
+                    // Get the download URL of the uploaded resume
+                    resumeStorageRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                        // Update the `resumeUrl` in the Realtime Database with the download URL
+                        userRef.child("resumeUrl").setValue(downloadUri.toString())
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    // Resume URI update successful
+                                    showSnackbar("Resume updated successfully")
+                                } else {
+                                    // Resume URI update failed
+                                    showSnackbar("Failed to update resume")
+                                }
+                            }
+                    }
+                }
+                .addOnFailureListener { e ->
+                    // Handle the error during resume upload
+                    showSnackbar("Failed to upload resume")
+                }
+        }
     }
 
+    // Override onActivityResult to handle the result of the file picker
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 2 && resultCode == Activity.RESULT_OK && data != null) {
+            resumeUri = data.data
+            // You can save the edited resume URI or update it in your database here
+            // Show a message or perform any necessary actions
+            showSnackbar("Resume updated successfully")
+        }
+    }
+
+    // Function to show a Snackbar message
+    private fun showSnackbar(message: String) {
+        // You can implement Snackbar here
+        // Example: Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    // ... rest of your code
 }
+

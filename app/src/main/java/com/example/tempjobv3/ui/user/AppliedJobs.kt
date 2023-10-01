@@ -1,6 +1,7 @@
 package com.example.tempjobv3.ui.user
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tempjobv3.R
 import com.example.tempjobv3.data.user.JobApplication
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class AppliedJobs : Fragment() {
@@ -36,23 +38,29 @@ class AppliedJobs : Fragment() {
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 jobApplicationsList.clear()
-                val jobApplicationsSnapshot = dataSnapshot.child("job_applications")
+                val jobApplicationsSnapshot = dataSnapshot.child("jobApplications")
+                val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
+
                 for (postSnapshot in jobApplicationsSnapshot.children) {
-                    val jobApplication = postSnapshot.getValue(JobApplication::class.java)
-                    if (jobApplication != null) {
-                        // Fetch job details based on jobId
-                        val jobId = jobApplication.jobListingId
-                        val jobDetailsSnapshot = dataSnapshot.child("Job").child(jobId)
-                        val jobTitle = jobDetailsSnapshot.child("jobTitle").getValue(String::class.java)
-                        val companyName = jobDetailsSnapshot.child("companyName").getValue(String::class.java)
-                        val companyAddress = jobDetailsSnapshot.child("companyAddress").getValue(String::class.java)
+                    try {
+                        val jobApplication = postSnapshot.getValue(JobApplication::class.java)
+                        if (jobApplication != null && jobApplication.customerId == currentUserId) {
+                            // Fetch job details based on jobId
+                            val jobId = jobApplication.jobReferences
+                            val jobDetailsSnapshot = dataSnapshot.child("Job").child(jobId)
+                            val jobTitle = jobDetailsSnapshot.child("jobTitle").getValue(String::class.java)
+                            val companyName = jobDetailsSnapshot.child("companyName").getValue(String::class.java)
+                            val companyAddress = jobDetailsSnapshot.child("jobLocation").getValue(String::class.java)
 
-                        // Set job details in the JobApplication object
-                        jobApplication.jobTitle = jobTitle
-                        jobApplication.companyName = companyName
-                        jobApplication.companyAddress = companyAddress
+                            // Set job details in the JobApplication object
+                            jobApplication.jobTitle = jobTitle
+                            jobApplication.companyName = companyName
+                            jobApplication.jobLocation = companyAddress
 
-                        jobApplicationsList.add(jobApplication)
+                            jobApplicationsList.add(jobApplication)
+                        }
+                    } catch (e: Exception) {
+                        Log.e("AppliedJobs", "Error parsing data: ${e.message}")
                     }
                 }
                 jobApplicationsAdapter.notifyDataSetChanged()

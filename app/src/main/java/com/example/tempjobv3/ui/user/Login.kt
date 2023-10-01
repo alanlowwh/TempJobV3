@@ -12,11 +12,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.tempjobv3.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 class Login : Fragment(R.layout.fragment_login) {
 
@@ -70,46 +66,27 @@ class Login : Fragment(R.layout.fragment_login) {
     private fun checkUserRole(email: String) {
         val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().reference
         val usersRef: DatabaseReference = databaseReference.child("users")
-        val adminRef: DatabaseReference = databaseReference.child("admin")
 
         // Check the user's role in the 'users' entity
         usersRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    // User found in 'users' entity, they have the 'customer' role
-                    findNavController().navigate(R.id.action_login_to_profile)
+                    // User found in 'users' entity, check their role
+                    val user = dataSnapshot.children.firstOrNull()
+                    val role = user?.child("role")?.value as? String
+
+                    if (role == "admin") {
+                        // User has the 'admin' role, navigate to the admin screen
+                        findNavController().navigate(R.id.action_login_to_list_job)
+                    } else {
+                        // User has the 'customer' role, navigate to the profile
+                        findNavController().navigate(R.id.action_login_to_profile)
+                    }
                 } else {
-                    // User not found in 'users' entity, check in 'admin' entity
-                    checkAdminRole(email)
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Handle database error
-                Toast.makeText(
-                    requireContext(),
-                    "Database error: " + databaseError.message,
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        })
-    }
-
-    private fun checkAdminRole(email: String) {
-        val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().reference
-        val adminRef: DatabaseReference = databaseReference.child("admin")
-
-        // Check the user's role in the 'admin' entity
-        adminRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    // User found in 'admin' entity, they have the 'admin' role
-                    findNavController().navigate(R.id.action_login_to_list_job)
-                } else {
-                    // User not found in 'admin' entity, handle other cases if needed
+                    // User not found in 'users' entity
                     Toast.makeText(
                         requireContext(),
-                        "User not found in either 'users' or 'admin' entity.",
+                        "User not found in 'users' entity.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

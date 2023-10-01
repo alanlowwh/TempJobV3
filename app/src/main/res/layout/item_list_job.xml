@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@drawable/recyclerview_shape"
     android:layout_marginBottom="10dp"
-    android:layout_marginTop="8dp"
+    android:layout_marginTop="30dp"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:paddingBottom="20dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/rowLayout">
 
     <TextView
-        android:id="@+id/jobTitleTextView"
+        android:id="@+id/jobTitle_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -23,23 +23,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/companyNameTextView"
+        android:id="@+id/companyName_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="13dp"
         android:text="Salary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jobTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/jobTitle_textView" />
 
     <TextView
-        android:id="@+id/salaryTextView"
+        android:id="@+id/salary_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="13dp"
         android:textColor="@color/location_font_color"
-        android:text="Kuala Lumpur"
+        android:text="RM20000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/companyNameTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/companyName_textView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
