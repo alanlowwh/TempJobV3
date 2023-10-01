@@ -80,7 +80,7 @@ class Login : Fragment(R.layout.fragment_login) {
                         findNavController().navigate(R.id.action_login_to_list_job)
                     } else {
                         // User has the 'customer' role, navigate to the profile
-                        findNavController().navigate(R.id.action_login_to_profile)
+                        findNavController().navigate(R.id.action_login_to_cusJobList)
                     }
                 } else {
                     // User not found in 'users' entity

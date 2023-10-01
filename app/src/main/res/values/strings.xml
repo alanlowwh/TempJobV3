@@ -9,11 +9,26 @@
     </string-array>
 
     <string-array name="job_title_options">
-        <item>Job Title 1</item>
-        <item>Job Title 2</item>
-        <item>Job Title 3</item>
-        <item>Job Title 4</item>
-        <item>Job Title 5</item>
+        <item>Software Engineer</item>
+        <item>Registered Nurse</item>
+        <item>Marketing Manager</item>
+        <item>Data Analyst</item>
+        <item>Graphic Designer</item>
+        <item>Sales Representative</item>
+        <item>Accountant</item>
+        <item>Human Resources Specialist</item>
+        <item>Project Manager</item>
+        <item>Electrical Engineer</item>
+        <item>Customer Service Representative</item>
+        <item>Web Developer</item>
+        <item>Financial Analyst</item>
+        <item>Teacher</item>
+        <item>Administrative Assistant</item>
+        <item>Pharmacist</item>
+        <item>Mechanical Engineer</item>
+        <item>Social Media Manager</item>
+        <item>Business Analyst</item>
+        <item>Chef</item>
     </string-array>
 
     <!-- Add more job titles here -->

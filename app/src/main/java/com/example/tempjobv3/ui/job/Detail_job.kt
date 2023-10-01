@@ -85,8 +85,7 @@ class detail_job : Fragment() {
                                 viewJobApplicationButton.text = "View Job Application"
                                 viewJobApplicationButton.setOnClickListener {
                                     // Navigate to the Application Job page for admin
-                                    val action =
-                                        detail_jobDirections.actionDetailJobToApplicationJob()
+                                    val action = detail_jobDirections.actionDetailJobToApplicationJob()
                                     findNavController().navigate(action)
                                 }
                             } else {
@@ -128,17 +127,44 @@ class detail_job : Fragment() {
 
         val jobApplicationsRef = databaseReference.child("jobApplications")
 
-        jobApplicationsRef.child(jobApplicationId).setValue(jobApplication)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    // Application submitted successfully
-                    Toast.makeText(requireContext(), "Application submitted!", Toast.LENGTH_LONG).show()
-                    // You can navigate to another screen here if needed
-                } else {
-                    // Application submission failed, handle the error
-                    Toast.makeText(requireContext(), "Failed to submit application", Toast.LENGTH_LONG).show()
+        // Check if the user has already applied for this exact job
+        jobApplicationsRef.orderByChild("customerId")
+            .equalTo(customerId)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    var alreadyApplied = false
+
+                    for (applicationSnapshot in dataSnapshot.children) {
+                        val jobListingId = applicationSnapshot.child("jobReferences").getValue(String::class.java)
+                        if (jobListingId == receivedJob.jobReferences.toString()) {
+                            alreadyApplied = true
+                            break
+                        }
+                    }
+
+                    if (alreadyApplied) {
+                        // User has already applied for this exact job
+                        Toast.makeText(requireContext(), "You have already applied for this job.", Toast.LENGTH_LONG).show()
+                    } else {
+                        // User has not applied for this exact job, proceed with the application
+                        jobApplicationsRef.child(jobApplicationId).setValue(jobApplication)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    // Application submitted successfully
+                                    Toast.makeText(requireContext(), "Application submitted!", Toast.LENGTH_LONG).show()
+                                    // You can navigate to another screen here if needed
+                                } else {
+                                    // Application submission failed, handle the error
+                                    Toast.makeText(requireContext(), "Failed to submit application", Toast.LENGTH_LONG).show()
+                                }
+                            }
+                    }
                 }
-            }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle database error
+                }
+            })
     }
 
     private fun generateUniqueJobApplicationId(): String {

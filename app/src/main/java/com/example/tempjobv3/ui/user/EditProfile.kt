@@ -140,10 +140,27 @@ class EditProfile : Fragment() {
     // Function to update the user's profile data
     private fun updateProfile() {
         // Get the updated data from the UI elements
-        val updatedName = nameEditText.text.toString()
-        val updatedPhone = phoneEditText.text.toString()
+        val updatedName = nameEditText.text.toString().trim()
+        val updatedPhone = phoneEditText.text.toString().trim()
         val updatedGender = genderSpinner.selectedItem.toString()
         val updatedJobTitle = jobTitleSpinner.selectedItem.toString()
+
+        // Check if the name, phone number, and resume URI are not empty
+        if (updatedName.isEmpty()) {
+            nameEditText.error = "Name cannot be empty"
+            return
+        }else if(!isValidName(updatedName)){
+            nameEditText.error = "Invalid Name"
+            return
+        }
+
+        if (updatedPhone.isEmpty()) {
+            phoneEditText.error = "Phone number cannot be empty"
+            return
+        }else if (!isValidPhone(updatedPhone)) {
+            phoneEditText.error = "Invalid phone number. Phone should start from 0 and be 10-11 digits."
+            return
+        }
 
         // Get the current user's UID
         val userId = FirebaseAuth.getInstance().currentUser?.uid
@@ -227,6 +244,17 @@ class EditProfile : Fragment() {
     private fun showSnackbar(message: String) {
         // You can implement Snackbar here
         // Example: Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    private fun isValidName(name: String): Boolean {
+        val namePattern = Regex("^[a-zA-Z ]+\$") // Allows alphabetic characters and spaces
+        return namePattern.matches(name)
+    }
+
+    private fun isValidPhone(phone: String): Boolean {
+        // Validate phone with a regular expression for 10-11 digit numbers starting with '0'
+        val phonePattern = Regex("^0[0-9]{9,10}\$")
+        return phonePattern.matches(phone)
     }
 
     // ... rest of your code

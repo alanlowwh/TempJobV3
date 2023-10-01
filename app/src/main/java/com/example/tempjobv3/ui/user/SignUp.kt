@@ -83,6 +83,8 @@ class SignUp : Fragment(R.layout.fragment_sign_up) {
 
                 if (name.isEmpty()) {
                     errorMessages.add("Name cannot be empty.")
+                }else if(!isValidName(name)){
+                    errorMessages.add("Invalid Name.")
                 }
 
                 if (email.isEmpty()) {
@@ -163,6 +165,11 @@ class SignUp : Fragment(R.layout.fragment_sign_up) {
         // Validate password with a regular expression for at least 6 characters and at least one symbol
         val passwordPattern = Regex("^(?=.*[A-Za-z0-9])(?=.*[^A-Za-z0-9]).{6,}\$")
         return passwordPattern.matches(password)
+    }
+
+    private fun isValidName(name: String): Boolean {
+        val namePattern = Regex("^[a-zA-Z ]+\$") // Allows alphabetic characters and spaces
+        return namePattern.matches(name)
     }
 
     private fun checkEmailExistence(
