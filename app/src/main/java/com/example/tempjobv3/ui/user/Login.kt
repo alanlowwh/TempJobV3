@@ -58,7 +58,6 @@ class Login : Fragment(R.layout.fragment_login) {
         }
 
         registerNowTextView.setOnClickListener {
-            // Navigate to the registration fragment
             findNavController().navigate(R.id.action_login_to_signUp)
         }
     }
@@ -71,19 +70,15 @@ class Login : Fragment(R.layout.fragment_login) {
         usersRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    // User found in 'users' entity, check their role
                     val user = dataSnapshot.children.firstOrNull()
                     val role = user?.child("role")?.value as? String
 
                     if (role == "admin") {
-                        // User has the 'admin' role, navigate to the admin screen
                         findNavController().navigate(R.id.action_login_to_list_job)
                     } else {
-                        // User has the 'customer' role, navigate to the profile
                         findNavController().navigate(R.id.action_login_to_cusJobList)
                     }
                 } else {
-                    // User not found in 'users' entity
                     Toast.makeText(
                         requireContext(),
                         "User not found in 'users' entity.",

@@ -107,25 +107,18 @@ class Profile : Fragment() {
                         }
                     }
                 } else {
-                    // Data does not exist at the specified location
-                    // Handle this case if necessary
                     Log.d("UserProfile", "No data found")
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Handle database error
                 Log.e("UserProfile", "Database Error: ${databaseError.message}")
             }
         })
     }
 
     private fun logout() {
-        // Sign out the user from Firebase Authentication
         FirebaseAuth.getInstance().signOut()
-
-        // After signing out, navigate the user to the login screen (or any desired destination)
-        // You can use findNavController() to navigate to the appropriate destination
         findNavController().navigate(R.id.action_profile_to_login)
     }
 }

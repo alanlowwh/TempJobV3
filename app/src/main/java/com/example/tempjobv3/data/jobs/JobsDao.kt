@@ -31,8 +31,6 @@ interface JobsDao {
     @Query("SELECT MAX(jobListingId) FROM JobListing")
     fun getLastInsertedId(): Long
 
-//    @Query("SELECT last_insert_rowid() FROM JobListing")
-//    fun getLastInsertedId(): LiveData<Long>
 
 
 }

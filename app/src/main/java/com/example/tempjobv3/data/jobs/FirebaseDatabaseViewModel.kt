@@ -11,12 +11,8 @@ class FirebaseDatabaseViewModel : ViewModel() {
 
         jobListingReference.setValue(updatedJob)
             .addOnSuccessListener {
-                // Handle success (the data has been successfully updated)
-                // You can notify the user or perform any other necessary action here
             }
             .addOnFailureListener { error ->
-                // Handle failure (an error occurred while updating the data)
-                // You can log the error or show an error message to the user
             }
     }
 }

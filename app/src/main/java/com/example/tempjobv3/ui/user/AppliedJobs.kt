@@ -67,7 +67,6 @@ class AppliedJobs : Fragment() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Handle error
             }
         })
 
