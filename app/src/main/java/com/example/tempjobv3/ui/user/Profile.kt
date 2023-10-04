@@ -7,20 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.findNavController
 import com.example.tempjobv3.R
 import com.example.tempjobv3.data.user.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.Query
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
 
 class Profile : Fragment() {
 
     private lateinit var usernameTextView: TextView
+    private lateinit var appliedJobsCardView: CardView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +28,7 @@ class Profile : Fragment() {
 
         // Initialize the TextView for displaying the username
         usernameTextView = view.findViewById(R.id.userName)
+        appliedJobsCardView = view.findViewById(R.id.appliedJobCardView)
 
         // Check if the user is logged in
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -38,7 +37,7 @@ class Profile : Fragment() {
             findNavController().navigate(R.id.action_profile_to_login)
         } else {
             // User is logged in, fetch and display user data
-            fetchUserData()
+            fetchUserData(currentUser)
         }
 
         return view
@@ -61,13 +60,6 @@ class Profile : Fragment() {
             findNavController().navigate(R.id.action_profile_to_changePassword)
         }
 
-        val appliedJobs = view.findViewById<TextView>(R.id.appliedJobs)
-        // Handle click on "emailPassword" TextView
-        appliedJobs.setOnClickListener {
-            // Navigate to the "emailPassword" destination using the defined action
-            findNavController().navigate(R.id.action_profile_to_appliedJobs)
-        }
-
         val logoutTextView = view.findViewById<TextView>(R.id.logout)
         logoutTextView.setOnClickListener {
             // Call the logout function when the "Logout" TextView is clicked
@@ -75,9 +67,9 @@ class Profile : Fragment() {
         }
     }
 
-    private fun fetchUserData() {
+    private fun fetchUserData(currentUser: FirebaseUser) {
         // Get the current user's UID from Firebase Authentication
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        val userId = currentUser.uid
 
         // Reference to the Firebase Realtime Database
         val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().reference
@@ -86,7 +78,7 @@ class Profile : Fragment() {
         val usersRef: DatabaseReference = databaseReference.child("users")
 
         // Query the database to retrieve the user's data based on their UID
-        val userQuery: Query = usersRef.child(userId!!)
+        val userQuery: Query = usersRef.child(userId)
 
         userQuery.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -101,6 +93,18 @@ class Profile : Fragment() {
                     user?.let {
                         // Set the username in the TextView
                         usernameTextView.text = it.name
+
+                        // Check if the user is an admin
+                        if (it.role == "admin") {
+                            // User is an admin, hide the "Applied Jobs" option
+                            appliedJobsCardView.visibility = View.GONE
+                        } else {
+                            // User is not an admin, handle the "Applied Jobs" option click event
+                            appliedJobsCardView.setOnClickListener {
+                                // Navigate to the "Applied Jobs" destination using the defined action
+                                findNavController().navigate(R.id.action_profile_to_appliedJobs)
+                            }
+                        }
                     }
                 } else {
                     // Data does not exist at the specified location
@@ -124,5 +128,4 @@ class Profile : Fragment() {
         // You can use findNavController() to navigate to the appropriate destination
         findNavController().navigate(R.id.action_profile_to_login)
     }
-
 }

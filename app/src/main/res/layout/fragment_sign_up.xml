@@ -101,27 +101,6 @@
             android:textColorHint="#000000"
             android:paddingStart="13dp" />
 
-        <!--        &lt;!&ndash; Circular ImageView &ndash;&gt;-->
-        <!--        <ImageView-->
-        <!--            android:id="@+id/profileImageView"-->
-        <!--            android:layout_width="160dp"-->
-        <!--            android:layout_height="160dp"-->
-        <!--            android:layout_gravity="center_horizontal"-->
-        <!--            android:layout_marginTop="16dp"-->
-        <!--            android:scaleType="centerCrop"-->
-        <!--            android:src="@drawable/profile" /> &lt;!&ndash; Set a default image &ndash;&gt;-->
-
-        <!--        <Button-->
-        <!--            android:id="@+id/buttonImageUpload"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="40dp"-->
-        <!--            android:layout_marginTop="10dp"-->
-        <!--            android:layout_marginStart="24dp"-->
-        <!--            android:layout_marginEnd="24dp"-->
-        <!--            android:text="Upload Image"-->
-        <!--            android:background="@drawable/edittext_rounded_background"-->
-        <!--            android:textColor="@color/black" />-->
-
                 <Button
                     android:id="@+id/buttonResumeUpload"
                     android:layout_width="match_parent"
